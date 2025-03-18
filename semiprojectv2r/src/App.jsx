@@ -1,3 +1,5 @@
+import React from 'react';
+import  Header from './pages/layout/Header';
 import './styles/App.css'
 
 function App() {
@@ -5,9 +7,9 @@ function App() {
   return (
       <>
           <Header />
-          <Nav />
-          <Main />
-          <Footer />
+          {/*<Nav />*/}
+          {/*<Main />*/}
+          {/*<Footer />*/}
       </>
   )
 }
