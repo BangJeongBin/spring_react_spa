@@ -1,11 +1,41 @@
 import {useRef, useState} from "react";
 import "../styles/member.css";
 
+
 // 폼 재설정 함수 - 외부에서 사용
 const resetForm = (formJoinRef, setErrors) => {
     formJoinRef.current.reset();
     setErrors({});
 };
+
+
+// 회원가입 처리 함수
+const processJoinOk = async (formValues) => {
+    // Web Crypto API로 비밀번호 암호화
+    // formValues.passwd = await hashPassword(formValues.passwd);
+    // console.log(formValues.passwd);
+
+    fetch('http://localhost:8080/api/auth/signup', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues)    // 데이터를 JSON 문자열로 변환
+    }).then(async response => {
+        if (response.ok) {  // 회원가입이 정상적으로 처리되었다면
+            alert('회원가입이 완료되었습니다.')
+            location.href = '/member/login'
+        } else if (response.status === 400){
+            alert(await response.text());
+        } else {
+            alert('회원가입에 실패했습니다.')
+        }
+    }).catch(error => {
+        console.error('join error:', error)
+        alert('서버와 통신 실패!')
+    });
+};
+
 
 // Join 함수 컴포넌트 정의
 const Join = () => {
@@ -36,6 +66,8 @@ const Join = () => {
 
         if (Object.keys(formErrors).length === 0) { // 유효성 검사 후 오류가 하나도 없다면
             console.log('입력한 회원 정보 : ', formValues);
+            // 회원가입처리 API 호출
+            processJoinOk(formValues);
         } else {    // 오류가 하나라도 존재하는 경우
             setErrors(formErrors);
             console.log('오류 정보 : ', formErrors);
