@@ -1,4 +1,4 @@
-package com.example.semiprojectv2;
+package com.example.semiprojectv2m;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
