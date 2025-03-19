@@ -1,6 +1,12 @@
 import {useRef, useState} from "react";
 import "../styles/member.css";
 
+// 폼 재설정 함수 - 외부에서 사용
+const resetForm = (formJoinRef, setErrors) => {
+    formJoinRef.current.reset();
+    setErrors({});
+};
+
 // Join 함수 컴포넌트 정의
 const Join = () => {
 
@@ -8,7 +14,14 @@ const Join = () => {
     const formJoinRef = useRef(null);
 
     // 오류상태를 위한 변수 선언
+    // errors : 상태를 저장하기 위한 변수
+    // setErrors : errors 변수의 상태를 변경하는 함수
     const [errors, setErrors] = useState({});
+
+
+    // 폼 재설정 처리 - 외부에서 사용
+    const handleReset = () => resetForm(formJoinRef, setErrors);
+
 
     // 폼 제출시 데이터 처리 및 유효성 검사
     const handleJoinSubmit = (e) => {
@@ -28,6 +41,7 @@ const Join = () => {
             console.log('오류 정보 : ', formErrors);
         }
     };
+
 
     // 전체 폼 유효성 검사 함수
     const validateJoinForm = (values) => {
@@ -117,7 +131,8 @@ const Join = () => {
                     <button type="submit" className="btn btn-primary"><i
                         className="fa-sharp fa-solid fa-file-signature"></i> 입력완료
                     </button>
-                    <button type="reset" className="btn btn-danger"><i className="fa-sharp fa-solid fa-eraser"></i> 다시입력
+                    <button type="button" className="btn btn-danger" onClick={handleReset}>
+                        <i className="fa-sharp fa-solid fa-eraser"></i> 다시입력
                     </button>
                 </div>
 
