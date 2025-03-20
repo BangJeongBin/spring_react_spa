@@ -96,7 +96,7 @@ const Login = () => {
 
                 <div className="form-floating py-2">
                     <input type="password" name="passwd" id="passwd" className={`form-control ${errors.passwd ? 'is-invalid' : ''}`}
-                           required placeholder="비밀번호"/>
+                           required placeholder="비밀번호" />
                     <label htmlFor="passwd" className="form-label">비밀번호</label>
                     {errors.passwd && <div className="invalid-feedback">{errors.passwd}</div>}
                 </div>
