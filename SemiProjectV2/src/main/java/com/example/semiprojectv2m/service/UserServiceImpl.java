@@ -1,5 +1,6 @@
 package com.example.semiprojectv2m.service;
 
+import com.example.semiprojectv2m.domain.Member;
 import com.example.semiprojectv2m.domain.User;
 import com.example.semiprojectv2m.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,15 @@ public class UserServiceImpl implements UserService {
         return userMapper.save(user);
     }
 
+
     @Override
     public User loginUser(User user) {
-        return null;
+        User findUser = userMapper.findByUserid(user.getUserid());
+
+        if (findUser == null || !findUser.getPasswd().equals(user.getPasswd())) {
+            // 보안의 관점에서 세밀한 정보를 제공하지 않기 위한 조건
+            throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
+        }
+        return findUser;
     }
 }
