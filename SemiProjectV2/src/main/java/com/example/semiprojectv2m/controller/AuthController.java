@@ -1,5 +1,6 @@
 package com.example.semiprojectv2m.controller;
 
+import com.example.semiprojectv2m.domain.Member;
 import com.example.semiprojectv2m.domain.MemberDTO;
 import com.example.semiprojectv2m.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,28 @@ public class AuthController {
 
         try {
             memberService.newMember(member);
+            response =  ResponseEntity.ok().build();
+        } catch (IllegalStateException e) {
+            response = ResponseEntity.badRequest().body(e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+
+    @PostMapping("/signin")
+    public ResponseEntity<?> loginok(@RequestBody MemberDTO member) {
+        ResponseEntity<?> response = ResponseEntity.internalServerError().build();
+
+        log.info("submit된 로그인 정보 : {}", member);
+
+        try {
+            Member loginUser = memberService.loginMember(member);
+            // 세션 처리
+
+
             response =  ResponseEntity.ok().build();
         } catch (IllegalStateException e) {
             response = ResponseEntity.badRequest().body(e.getMessage());

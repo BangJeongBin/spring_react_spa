@@ -1,5 +1,6 @@
 package com.example.semiprojectv2m.repository;
 
+import com.example.semiprojectv2m.domain.Member;
 import com.example.semiprojectv2m.domain.MemberDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,4 +17,7 @@ public interface MemberRepository {
 
     @Select("select count(userid) from members where email = #{eamil}")
     int countByEmail(String email);
+
+    @Select("select * from members where userid = #{userid}")
+    Member findByUserid(String userid);
 }
