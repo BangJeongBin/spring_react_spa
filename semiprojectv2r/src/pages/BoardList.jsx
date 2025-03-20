@@ -3,6 +3,10 @@ import "../styles/board.css";
 
 // BoardList 함수 컴포넌트 정의
 const BoardList = () => {
+    const goBoardWrite = () => {
+        location.href = '/board/write';
+    };
+
     return (
         <main id="content">
             <h2>게시판</h2>
@@ -21,8 +25,9 @@ const BoardList = () => {
                 <tr>
                     <td colSpan="3" className="text-start">
                         <div className="d-flex align-items-center gap-3">
-                            <select className="form-select" style={{width: "120px"}} id="findtype" name="findtype">
-                                <option value="title" selected>제목</option>
+                            <select className="form-select" style={{width: "120px"}}
+                                    id="findtype" name="findtype" defaultValue="title">
+                                <option value="title">제목</option>
                                 <option value="userid">작성자</option>
                                 <option value="contents">내용</option>
                             </select>
@@ -33,7 +38,7 @@ const BoardList = () => {
                         </div>
                     </td>
                     <td colSpan="3" className="text-end">
-                        <button type="button" className="btn btn-primary" id="newbdbtn">
+                        <button type="button" className="btn btn-primary" id="newbdbtn" onClick={goBoardWrite}>
                             <i className="fas fa-pen" /> 글쓰기
                         </button>
                     </td>

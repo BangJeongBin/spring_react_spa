@@ -21,7 +21,6 @@ public class BoardController {
         log.info("submit 된 게시판 데이터 : {}", board);
 
         ResponseEntity<?> response = ResponseEntity.internalServerError().build();
-
         try {
             boardService.newBoard(board);
             response = ResponseEntity.ok().build();
