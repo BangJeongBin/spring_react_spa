@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/board.css";
 
-// BaordList 함수 컴포넌트 정의
-const BaordList = () => {
+// BoardList 함수 컴포넌트 정의
+const BoardList = () => {
     return (
         <main id="content">
             <h2>게시판</h2>
@@ -381,4 +381,4 @@ const BaordList = () => {
     )
 }
 
-export default BaordList;
+export default BoardList;
