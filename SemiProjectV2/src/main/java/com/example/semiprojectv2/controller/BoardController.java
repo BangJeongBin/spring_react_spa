@@ -1,9 +1,11 @@
-package com.example.semiprojectv2m.controller;
+package com.example.semiprojectv2.controller;
 
-import com.example.semiprojectv2m.domain.Board;
-import com.example.semiprojectv2m.service.BoardService;
+import com.example.semiprojectv2.domain.Board;
+import com.example.semiprojectv2.domain.BoardListDTO;
+import com.example.semiprojectv2.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController {
 
     private final BoardService boardService;
+
 
     @PostMapping("/write")
     public ResponseEntity<?> writeok(@RequestBody Board board) {
@@ -28,5 +31,13 @@ public class BoardController {
             response = ResponseEntity.badRequest().body(ex.getMessage());
         }
         return response;
+    }
+
+
+    @GetMapping("/list")
+    public ResponseEntity<?> list(@RequestParam(defaultValue = "1") int cpg) {
+        BoardListDTO boardListDTO = boardService.readBoard(cpg);
+
+        return new ResponseEntity<>(boardListDTO, HttpStatus.OK);
     }
 }

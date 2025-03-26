@@ -1,8 +1,7 @@
-package com.example.semiprojectv2m.service;
+package com.example.semiprojectv2.service;
 
-import com.example.semiprojectv2m.domain.Member;
-import com.example.semiprojectv2m.domain.User;
-import com.example.semiprojectv2m.repository.UserRepository;
+import com.example.semiprojectv2.domain.User;
+import com.example.semiprojectv2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

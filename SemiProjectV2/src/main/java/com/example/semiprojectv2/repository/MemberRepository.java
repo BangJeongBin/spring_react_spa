@@ -1,7 +1,7 @@
-package com.example.semiprojectv2m.repository;
+package com.example.semiprojectv2.repository;
 
-import com.example.semiprojectv2m.domain.Member;
-import com.example.semiprojectv2m.domain.MemberDTO;
+import com.example.semiprojectv2.domain.Member;
+import com.example.semiprojectv2.domain.MemberDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

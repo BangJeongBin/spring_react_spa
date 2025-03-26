@@ -1,10 +1,8 @@
-package com.example.semiprojectv2m.controller;
+package com.example.semiprojectv2.controller;
 
-import com.example.semiprojectv2m.domain.Member;
-import com.example.semiprojectv2m.domain.MemberDTO;
-import com.example.semiprojectv2m.domain.User;
-import com.example.semiprojectv2m.service.MemberService;
-import com.example.semiprojectv2m.service.UserService;
+import com.example.semiprojectv2.domain.User;
+import com.example.semiprojectv2.service.MemberService;
+import com.example.semiprojectv2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

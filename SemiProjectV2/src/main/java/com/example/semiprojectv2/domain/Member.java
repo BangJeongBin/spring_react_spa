@@ -1,4 +1,4 @@
-package com.example.semiprojectv2m.domain;
+package com.example.semiprojectv2.domain;
 
 import lombok.Builder;
 import lombok.Data;
