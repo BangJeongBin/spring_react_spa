@@ -40,7 +40,7 @@ const BoardList = () => {
     const goBoardFind = () => {
         const findtype = ftypeRef.current.value;
         const findkey = fkeyRef.current.value;
-        location.href = `/board/find/${findtype}/${findkey}/${cpg}`;
+        location.href = `/board/find/${findtype}/${findkey}/1`;
     };
 
     return (
