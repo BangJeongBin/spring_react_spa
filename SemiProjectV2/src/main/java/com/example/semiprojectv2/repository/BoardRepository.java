@@ -14,5 +14,11 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 //            nativeQuery = true)
 //    List<BoardDTO> findBoards(int stnum, int pageSize);
 
-    Page<BoardDTO> findBy(Pageable pageable); // JPA 자동 페이지네이션 - 데이터베이스에 상관없이 sql문 자동 생성 
+    Page<BoardDTO> findBy(Pageable pageable); // JPA 자동 페이지네이션 - 데이터베이스에 상관없이 sql문 자동 생성
+
+    Page<BoardDTO> findByTitleContains(Pageable pageable, String findkey);
+    Page<BoardDTO> findByUseridContains(Pageable pageable, String findkey);
+    Page<BoardDTO> findByContentsContains(Pageable pageable, String findkey);
+
+    Page<BoardDTO> findByTitleContainsOrContentsContains(Pageable pageable, String fkey1, String fkey2);
 }
