@@ -35,8 +35,8 @@ public class BoardController {
 
 
     // list 엔드포인트 변경
-    // 변경 전 : http://localhost:8080/api/board/list?cpg=1
-    // 변경 후 : http://localhost:8080/api/board/list/1
+    // 변경 전 : http://localhost:8080/api/board/list?cpg=4
+    // 변경 후 : http://localhost:8080/api/board/list/4
     @GetMapping("/list/{cpg}")
     public ResponseEntity<?> list(@PathVariable int cpg) {
         BoardListDTO boardListDTO = boardService.readBoard(cpg);

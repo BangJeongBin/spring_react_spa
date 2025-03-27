@@ -13,8 +13,8 @@ const Nav = () => {
                 <li className="nav-item">
                     <a href="/member/login" className="nav-link">로그인</a></li>
 
-                <li className="nav-item"><a href="/board/list" className="nav-link">게시판</a></li>
-                <li className="nav-item"><a href="/gallery/list" className="nav-link">갤러리</a></li>
+                <li className="nav-item"><a href="/board/list/1" className="nav-link">게시판</a></li>
+                <li className="nav-item"><a href="/gallery/list/1" className="nav-link">갤러리</a></li>
                 <li className="nav-item"><a href="/member/myinfo" className="nav-link">회원정보</a></li>
             </ul>
         </nav>

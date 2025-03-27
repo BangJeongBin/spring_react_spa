@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/member/join" element={<Join />} />
             <Route path="/member/login" element={<Login />} />
-            <Route path="/board/list" element={<BoardList />} />
+            <Route path="/board/list/:cpg" element={<BoardList />} /> {/* @PathVariable 사용 */}
             <Route path="/board/write" element={<BoardWrite />} />
             {/*<Route path="/gallery/list" element={<GalleryList />} />*/}
             <Route path="/member/myinfo" element={<Myinfo />} />
