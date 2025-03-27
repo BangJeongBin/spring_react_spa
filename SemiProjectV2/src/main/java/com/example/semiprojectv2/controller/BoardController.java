@@ -34,8 +34,11 @@ public class BoardController {
     }
 
 
-    @GetMapping("/list")
-    public ResponseEntity<?> list(@RequestParam(defaultValue = "1") int cpg) {
+    // list 엔드포인트 변경
+    // 변경 전 : http://localhost:8080/api/board/list?cpg=1
+    // 변경 후 : http://localhost:8080/api/board/list/1
+    @GetMapping("/list/{cpg}")
+    public ResponseEntity<?> list(@PathVariable int cpg) {
         BoardListDTO boardListDTO = boardService.readBoard(cpg);
 
         return new ResponseEntity<>(boardListDTO, HttpStatus.OK);
