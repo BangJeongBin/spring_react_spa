@@ -6,6 +6,10 @@ import com.example.semiprojectv2.domain.BoardListDTO;
 import com.example.semiprojectv2.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,9 +31,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardListDTO readBoard(int cpg) {
-        int stnum = (cpg - 1) * pageSize;
-        int totalItems = (int)boardMapper.count(); // JPA 자동 생성
-        List<BoardDTO> boards = boardMapper.findBoards(stnum, pageSize);
+        Pageable pageable = PageRequest.of(cpg, pageSize, Sort.Direction.DESC, "bno");
+
+        Page<BoardDTO> pageBoards = boardMapper.findBy(pageable);
+        List<BoardDTO> boards = pageBoards.getContent();
+        int totalItems = (int) pageBoards.getTotalElements();
+        int cntpg = pageBoards.getTotalPages();
 
         return new BoardListDTO(cpg, totalItems, pageSize, boards);
     }
