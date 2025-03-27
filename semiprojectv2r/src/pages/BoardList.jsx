@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom"; // @PathVariable 사용을 위한 import
 import "../styles/board.css";
 
 // BoardList 함수 컴포넌트 정의
 const BoardList = () => {
     const [boardData, setBoardData] = useState({}); // fetch한 board 데이터 받아주기
 
+    // 엔드포인트에서 path 변수 추출
+    // useParams : URL 경로상의 정의된 매개변수로 값을 추출
+    const params = useParams();
+    const cpg = params.cpg;
 
     // react에서 side effect(부수작업)을 하기 위한 hook
     // side effect : 데이터 가져오기, DOM 조작, 로그
     useEffect(() => {
-        fetch(`http://localhost:8080/api/board/list/`)
+        fetch(`http://localhost:8080/api/board/list/${cpg}`)
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -90,24 +95,29 @@ const BoardList = () => {
                 <tr>
                     <td colSpan="6">
                         <ul className="pagination">
-                            <li className="page-item">
-                                <a href="#" className="page-link">이전</a>
-                            </li>
+                            {(boardData.cpg > 1) &&
+                                (<li className="page-item">
+                                    <a href={`/board/list/${cpg - 1}`} className="page-link">이전</a></li>)
+                            }
 
-                            <li><a href="#" className="page-link">1</a></li>
-                            <li><a href="#" className="page-link">2</a></li>
-                            <li><a href="#" className="page-link">3</a></li>
-                            <li><a href="#" className="page-link">4</a></li>
-                            <li><a href="#" className="page-link">5</a></li>
-                            <li><a href="#" className="page-link">6</a></li>
-                            <li><a href="#" className="page-link">7</a></li>
-                            <li><a href="#" className="page-link">8</a></li>
-                            <li><a href="#" className="page-link">9</a></li>
-                            <li><a href="#" className="page-link">10</a></li>
+                            {
+                                (() => {
+                                    const pgns = [];
+                                    for (let i = boardData.stblk; i <= boardData.edblk; ++i) {
+                                        (
+                                            pgns.push(<li key={i} className={(i === boardData.cpg) ? 'page-iem active' : 'page-item'}>
+                                                <a href={`/board/list/${i}`} className="page-link">{i}</a>
+                                            </li>)
+                                        )
+                                    }
+                                    return pgns;
+                                })()
+                            }
 
-                            <li className="page-item">
-                                <a href="#" className="page-link">다음</a>
-                            </li>
+                            {(boardData.cpg < boardData.cntpg) &&
+                                (<li className="page-item">
+                                    <a href={`/board/list/${boardData.cpg + 1}`} className="page-link">다음</a></li>)
+                            }
                         </ul>
                     </td>
                 </tr>
