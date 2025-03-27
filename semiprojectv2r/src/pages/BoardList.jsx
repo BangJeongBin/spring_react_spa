@@ -1,21 +1,31 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {Link, useParams} from "react-router-dom"; // @PathVariable 사용을 위한 import
 import "../styles/board.css";
 
 // BoardList 함수 컴포넌트 정의
 const BoardList = () => {
     const [boardData, setBoardData] = useState({}); // fetch한 board 데이터 받아주기
+    // useRef : 특정 DOM 요소에 접근하기 위해 사용하는 리액트 hook
+    const ftypeRef = useRef(null);
+    const fkeyRef = useRef(null);
 
     // 엔드포인트에서 path 변수 추출
     // useParams : URL 경로상의 정의된 매개변수로 값을 추출
     const params = useParams();
     const cpg = params.cpg;
+    const ftype = params.ftype || null;
+    const fkey = params.fkey || null;
+    console.log(cpg, ftype, fkey);
+
+    const pglink = (fkey === null) ? `/board/list/` : `/board/find/${ftype}/${fkey}/`;
+    const fetchURL = `http://localhost:8080/api${pglink}${cpg}`;
 
     // react에서 side effect(부수작업)을 하기 위한 hook
     // side effect : 데이터 가져오기, DOM 조작, 로그
     useEffect(() => {
-        fetch(`http://localhost:8080/api/board/list/${cpg}`)
-        .then(res => res.json())
+        fetch(fetchURL, {
+            headers: {'Accept' : 'application/json'}
+        }).then(res => res.json())
         .then(data => {
             console.log(data);
             setBoardData(data);
@@ -25,6 +35,12 @@ const BoardList = () => {
 
     const goBoardWrite = () => {
         location.href = '/board/write';
+    };
+
+    const goBoardFind = () => {
+        const findtype = ftypeRef.current.value;
+        const findkey = fkeyRef.current.value;
+        location.href = `/board/find/${findtype}/${findkey}/${cpg}`;
     };
 
     return (
@@ -46,13 +62,13 @@ const BoardList = () => {
                     <td colSpan="3" className="text-start">
                         <div className="d-flex align-items-center gap-3">
                             <select className="form-select" style={{width: "120px"}}
-                                    id="findtype" name="findtype" defaultValue="title">
+                                    id="findtype" name="findtype" defaultValue="title" ref={ftypeRef}>
                                 <option value="title">제목</option>
                                 <option value="userid">작성자</option>
                                 <option value="contents">내용</option>
                             </select>
-                            <input className="form-control" style={{width: "250px"}} id="findkey" name="findkey" />
-                            <button className="btn btn-success" id="findbtn">
+                            <input className="form-control" style={{width: "250px"}} id="findkey" name="findkey" ref={fkeyRef} />
+                            <button className="btn btn-success" id="findbtn" onClick={goBoardFind}>
                                 <i className="fa-solid fa-magnifying-glass" /> 검색
                             </button>
                         </div>
@@ -97,7 +113,7 @@ const BoardList = () => {
                         <ul className="pagination">
                             {(boardData.cpg > 1) &&
                                 (<li className="page-item">
-                                    <a href={`/board/list/${cpg - 1}`} className="page-link">이전</a></li>)
+                                    <a href={`${pglink}${cpg - 1}`} className="page-link">이전</a></li>)
                             }
 
                             {
@@ -106,7 +122,7 @@ const BoardList = () => {
                                     for (let i = boardData.stblk; i <= boardData.edblk; ++i) {
                                         (
                                             pgns.push(<li key={i} className={(i === boardData.cpg) ? 'page-iem active' : 'page-item'}>
-                                                <a href={`/board/list/${i}`} className="page-link">{i}</a>
+                                                <a href={`${pglink}${i}`} className="page-link">{i}</a>
                                             </li>)
                                         )
                                     }
@@ -116,7 +132,7 @@ const BoardList = () => {
 
                             {(boardData.cpg < boardData.cntpg) &&
                                 (<li className="page-item">
-                                    <a href={`/board/list/${boardData.cpg + 1}`} className="page-link">다음</a></li>)
+                                    <a href={`${pglink}${boardData.cpg + 1}`} className="page-link">다음</a></li>)
                             }
                         </ul>
                     </td>
