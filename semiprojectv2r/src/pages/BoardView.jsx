@@ -14,7 +14,7 @@ const BoardView = () => {
     // side effect : 데이터 가져오기, DOM 조작, 로그
     useEffect(() => {
         fetch(fetchURL, {
-            headers: {'Accept' : 'application/json'}
+            headers: {'Accept': 'application/json'}
         }).then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -44,7 +44,27 @@ const BoardView = () => {
                     </tr>
                     </thead>
 
-                    <tbody id="boardView">
+                    <tbody>
+                    {
+                        (!boardData.bd) ?
+                            <tr>
+                                <td colSpan={3}>본문글이 없습니다.</td>
+                            </tr>
+                            :
+                            // 빈 태그는 JSX에서 여러 tr태그들을 하나로 묶어주는 container 역할을 한다.
+                            <>
+                                <tr>
+                                    <th className="vtit" colSpan="2">{boardData.bd.title}</th>
+                                </tr>
+                                <tr>
+                                    <td className="vinfo">{boardData.bd.userid}</td>
+                                    <td className="text-end vinfo">{boardData.bd.regdate}/{boardData.bd.thumbs}/{boardData.bd.views}</td>
+                                </tr>
+                                <tr>
+                                    <td className="vcont pre" colSpan="2">{boardData.bd.contents}</td>
+                                </tr>
+                            </>
+                    }
                     </tbody>
 
                     <tfoot>
