@@ -91,7 +91,7 @@ const BoardView = () => {
                         (boardData.rps) && boardData.rps.map(rp => (
                             // 출력유형이 댓글인 경우
                             (rp.rno === rp.ref) ?
-                                <tr key={`reply-${rp.rno}`}>
+                                (<tr key={`reply-${rp.rno}`}>
                                     <td className="text-left">{rp.userid}</td>
                                     <td>
                                         <div className="cmtbg"><span>{rp.regdate}</span>
@@ -101,9 +101,16 @@ const BoardView = () => {
                                         </div>
                                         <p className="py-1 pre">{rp.comments}</p>
                                     </td>
-                                </tr>
+                                </tr>)
                                 :
-                                ''
+                                (<tr key={`reply-${rp.rno}`}>
+                                    <td className="text-left">&nbsp;</td>
+                                    <td>
+                                        <div className="rpybg"><span>{rp.userid}</span>
+                                            <span className="pushend">{rp.regdate}</span></div>
+                                        <p className="py-1 pre">{rp.comments}</p>
+                                    </td>
+                                </tr>)
                         ))
                     }
                     </tbody>
