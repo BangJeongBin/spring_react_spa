@@ -3,6 +3,7 @@ package com.example.semiprojectv2.controller;
 import com.example.semiprojectv2.domain.Board;
 import com.example.semiprojectv2.domain.BoardDTO;
 import com.example.semiprojectv2.domain.BoardListDTO;
+import com.example.semiprojectv2.domain.BoardReplyDTO;
 import com.example.semiprojectv2.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,14 @@ public class BoardController {
         BoardListDTO boardListDTO = boardService.findBoard(cpg, findtype, findkey);
 
         return new ResponseEntity<>(boardListDTO, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/view/{bno}")
+    public ResponseEntity<?> view(@PathVariable Long bno) {
+        BoardReplyDTO boardReply = boardService.readOneBoardReply(bno);
+
+        return new ResponseEntity<>(boardReply, HttpStatus.OK);
     }
 
 

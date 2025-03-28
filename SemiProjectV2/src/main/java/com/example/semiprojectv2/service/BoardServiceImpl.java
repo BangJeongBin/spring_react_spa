@@ -3,6 +3,7 @@ package com.example.semiprojectv2.service;
 import com.example.semiprojectv2.domain.Board;
 import com.example.semiprojectv2.domain.BoardDTO;
 import com.example.semiprojectv2.domain.BoardListDTO;
+import com.example.semiprojectv2.domain.BoardReplyDTO;
 import com.example.semiprojectv2.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,8 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardMapper;
-    @Value("${board.pagesize}") private int pageSize;
+    @Value("${board.pagesize}")
+    private int pageSize;
 
 
     @Override
@@ -66,6 +68,14 @@ public class BoardServiceImpl implements BoardService {
         int totalItems = (int) pageBoards.getTotalElements();
 
         return new BoardListDTO(cpg, totalItems, pageSize, boards);
+    }
+
+
+    @Override
+    public BoardReplyDTO readOneBoardReply(Long bno) {
+        Board board = boardMapper.findByBno(bno);
+
+        return new BoardReplyDTO(board, null);
     }
 
 

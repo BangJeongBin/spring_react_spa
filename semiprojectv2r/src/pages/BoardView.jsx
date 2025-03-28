@@ -4,6 +4,24 @@ import "../styles/board.css";
 import BoardList from "./BoardList.jsx";
 
 const BoardView = () => {
+    const [boardData, setBoardData] = useState({}); // fetch한 board 데이터 받아주기
+    const params = useParams();
+    const bno = params.bno;
+
+    const fetchURL = `http://localhost:8080/api/board/view/${bno}`;
+
+    // react에서 side effect(부수작업)을 하기 위한 hook
+    // side effect : 데이터 가져오기, DOM 조작, 로그
+    useEffect(() => {
+        fetch(fetchURL, {
+            headers: {'Accept' : 'application/json'}
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setBoardData(data);
+            })
+            .catch(err => console.log('오류발생! ', err));
+    }, []);
 
     return (
         <main id="content">

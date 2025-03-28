@@ -3,6 +3,7 @@ package com.example.semiprojectv2.service;
 import com.example.semiprojectv2.domain.Board;
 import com.example.semiprojectv2.domain.BoardDTO;
 import com.example.semiprojectv2.domain.BoardListDTO;
+import com.example.semiprojectv2.domain.BoardReplyDTO;
 import org.springframework.data.domain.Page;
 
 public interface BoardService {
@@ -14,4 +15,6 @@ public interface BoardService {
     BoardListDTO findBoard(int cpg, String findtype, String findkey);
 
     Page<BoardDTO> testReadBoard(int cpg);
+
+    BoardReplyDTO readOneBoardReply(Long bno);
 }
