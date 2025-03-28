@@ -84,9 +84,33 @@ const BoardView = () => {
                 <div className="my-3">
                     <h3><i className="fa fa-commenting">나도 한마디!!</i></h3>
                 </div>
+
+                <table class="table reply-border" data-loginuser="">
+                    <tbody>
+                    {
+                        (boardData.rps) && boardData.rps.map(rp => (
+                            // 출력유형이 댓글인 경우
+                            (rp.rno === rp.ref) ?
+                                <tr key={`reply-${rp.rno}`}>
+                                    <td className="text-left">{rp.userid}</td>
+                                    <td>
+                                        <div className="cmtbg"><span>{rp.regdate}</span>
+                                            <span className="pushend">
+                                                <a href="#" data-ref="${rp.rno}" data-bs-toggle="modal" data-bs-target="#cmtModal">[추가]</a> [수정] [삭제]
+                                            </span>
+                                        </div>
+                                        <p className="py-1 pre">{rp.comments}</p>
+                                    </td>
+                                </tr>
+                                :
+                                ''
+                        ))
+                    }
+                    </tbody>
+                </table>
             </div>
         </main>
-);
+    );
 }
 
 export default BoardView;
