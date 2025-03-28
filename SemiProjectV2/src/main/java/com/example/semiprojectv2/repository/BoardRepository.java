@@ -27,14 +27,18 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Page<BoardDTO> findByTitleContainsOrContentsContains(Pageable pageable, String fkey1, String fkey2);
 
-    Board findByBno(Long bno);
+    // 연관매핑만으로 데이터 조회
+//    Board findByBno(Long bno);
 
     @Modifying
     @Query("update Board set views = views + 1 where bno = :bno")
     int updateViews(@Param("bno") Long bno);
 
-//    @Query("select b from Board b left join fetch b.replies where b.bno = :bno")
-//    Board findByBnoWithReply(@Param("bno") Long bno);
+    // 연관매핑 + outer join으로 데이터 조회
+    // 본문글과 댓글 조회를 위해 outer join 사용
+    // 즉, 본문글만 있고, 댓글이 없는 경우에도 출력하기 위해 사용
+    @Query("select b from Board b left join fetch b.replies where b.bno = :bno")
+    Board findByBno(@Param("bno") Long bno);
 
 //    @EntityGraph(attributePaths = {"reply"})
 //    Board findByBno(Long bno);
