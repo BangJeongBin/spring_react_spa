@@ -85,7 +85,7 @@ const BoardView = () => {
                     <h3><i className="fa fa-commenting">나도 한마디!!</i></h3>
                 </div>
 
-                <table class="table reply-border" data-loginuser="">
+                <table className="table reply-border" data-loginuser="">
                     <tbody>
                     {
                         (boardData.rps) && boardData.rps.map(rp => (

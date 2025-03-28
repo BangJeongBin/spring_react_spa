@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -70,8 +71,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
 
+    @Transactional
     @Override
     public BoardReplyDTO readOneBoardReply(Long bno) {
+        boardMapper.updateViews(bno);
         Board board = boardMapper.findByBno(bno);
         List<Reply> replies = replyMapper.findByPnoOrderByRef(bno);
 
