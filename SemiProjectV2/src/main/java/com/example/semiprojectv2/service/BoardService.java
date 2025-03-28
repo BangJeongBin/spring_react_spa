@@ -17,4 +17,6 @@ public interface BoardService {
     Page<BoardDTO> testReadBoard(int cpg);
 
     BoardReplyDTO readOneBoardReply(Long bno);
+
+    BoardReplyDTO readOneBoardWithReply(Long bno);
 }
