@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Myinfo from './pages/Myinfo';
 import BoardList from './pages/BoardList';
 import BoardWrite from './pages/BoardWrite';
+import BoardView from './pages/BoardView.jsx';
 import NotFound from './pages/NotFound';
 import './styles/App.css'
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/board/list/:cpg" element={<BoardList />} /> {/* @PathVariable 사용 */}
             <Route path="/board/find/:ftype/:fkey/:cpg" element={<BoardList />} /> {/* @PathVariable 사용 */}
             <Route path="/board/write" element={<BoardWrite />} />
+            <Route path="/board/view/:bno" element={<BoardView />} />
             {/*<Route path="/gallery/list" element={<GalleryList />} />*/}
             <Route path="/member/myinfo" element={<Myinfo />} />
             <Route path="*" element={<NotFound />} />
