@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="users")
+@Table(name = "users4")
 @Data @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,22 +18,23 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long mno;
 
-    @Column(nullable = false)
+    @Column(unique=true, nullable=false)
     private String userid;
 
-    @Column(nullable = false)
+    @Column(nullable=false)
     private String passwd;
 
-    @Column(nullable = false)
+    @Column(nullable=false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique=true, nullable=false)
     private String email;
 
-    // insert, update시 해당 컬럼 제외
+    @Column(nullable=false)
+    private String role;
+
     @CreationTimestamp
-    //@Column(insertable = false, updatable = false)
     private LocalDateTime regdate;
 }
