@@ -3,6 +3,7 @@ package com.example.semiprojectv2.service;
 import com.example.semiprojectv2.domain.User;
 import com.example.semiprojectv2.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,7 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginUser(User user) {
-        User findUser = userMapper.findByUserid(user.getUserid());
+        User findUser = userMapper.findByUserid(user.getUserid()).orElseThrow(
+                () -> new UsernameNotFoundException("사용자가 존재하지 않습니다.")
+        );
 
         if (findUser == null || !findUser.getPasswd().equals(user.getPasswd())) {
             // 보안의 관점에서 세밀한 정보를 제공하지 않기 위한 조건
