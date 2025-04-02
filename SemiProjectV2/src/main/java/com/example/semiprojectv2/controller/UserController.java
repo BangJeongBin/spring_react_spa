@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Map;
 
 // 교차출처 리소스 공유 CORS(Cross Origin Resource sharing)
-@CrossOrigin(origins="http://localhost:5173/")
+@CrossOrigin(origins= {"http://localhost:5173", "http://localhost:3001"})
 @Slf4j
 @Controller
 @RequestMapping("/api/member")

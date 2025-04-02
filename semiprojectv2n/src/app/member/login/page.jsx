@@ -1,7 +1,7 @@
 "use client"
 
 import {useRef, useState} from "react";
-import "@/app/member/join/member.css";
+import "@/app/member/member.css";
 
 // 폼 재설정 함수
 
