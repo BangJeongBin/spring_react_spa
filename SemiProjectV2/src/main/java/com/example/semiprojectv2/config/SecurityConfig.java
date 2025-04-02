@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf().disable() // CSRF 필터 끔(PostMan API 확인을 위해)
 //                    .userDetailsService(userDetailsService) // userDetailService 설정
                     .authorizeRequests() // URL 기반 인가 설정
-                    .antMatchers("/", "/api/auth/**", "/gallery/**", "/api/board/**").permitAll() //  인증/인가 여부와 상관없이 접근 가능
+                    .antMatchers("/", "/api/auth/**", "/gallery/**", "/api/board/**", "/api/member/**").permitAll() //  인증/인가 여부와 상관없이 접근 가능
                 .and()
                 .sessionManagement() // JWT 인증을 위해 STATELESS 설정
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

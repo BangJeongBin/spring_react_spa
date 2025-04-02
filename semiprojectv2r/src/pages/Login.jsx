@@ -17,9 +17,18 @@ const processLoginok = async (values) => {
         body: JSON.stringify(values),
     }).then(async response => {
         if (response.ok) {
-            alert('로그인 성공');
-            location.href = "/member/myinfo";
-        } else if (response.status === 400) {
+            const data = await response.json();
+            console.log(data);
+
+            if (data.accessToken) { // JWT 토큰이 존재하면
+                localStorage.setItem("accessToken", data.accessToken); // localStorage에 저장
+                alert('로그인 성공');
+                location.href = "/member/myinfo";
+            } else {
+                alert('다시 로그인 하세요')
+                location.href = "/member/login";
+            }
+        } else if (response.status === 401) {
             alert(await response.text());
         }
     }).catch(error => {
