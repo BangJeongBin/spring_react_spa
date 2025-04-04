@@ -107,10 +107,15 @@ const Join = () => {
         }
         
         // 이메일 검사
-        if (!values.email) {
+        if (!values["email"]) { // 배열로 접근해도 가능
             formErrors.email = "이메일을 입력하세요!!";
         } else if (!/\S+@\S+\.\S+/.test(values.email)) {
             formErrors.email = "유효한 이메일 주소를 입력하세요.";
+        }
+
+        // recaptcha 검사
+        if (!values["g-recaptcha-response"]) {
+            formErrors.recaptcha = "자동가입방지를 확인하세요!!";
         }
 
         return formErrors;
@@ -171,6 +176,8 @@ const Join = () => {
                 <div className="my-2 d-flex justify-content-center">
                     <div className="g-recaptcha" data-sitekey={sitekey}></div>
                 </div>
+                {errors.recaptcha && <div className="alert alert-danger">{errors.recaptcha}</div>}
+
 
                 <div className="my-2 d-flex justify-content-between">
                     <button type="submit" className="btn btn-primary"><i
