@@ -86,6 +86,12 @@ const GalleryWrite = () => {
         if (!values.contents) {
             formErrors.contents = "본문을 입력하세요.";
         }
+        
+        // 파일요소(첨부파일 크기) 검사
+        console.log(">> gallery write", values.ginames.size);
+        if (values.ginames.size === 0) {
+            formErrors.ginames = "이미지 파일을 첨부하세요.";
+        }
 
         // recaptcha 검사
         if (!values["g-recaptcha-response"]) {
@@ -130,7 +136,7 @@ const GalleryWrite = () => {
                     <input type="file" name="ginames" id="ginames"
                            className={`form-control h-100 ${errors.ginames ? 'is-invalid' : ''}`} multiple required/>
                     <input type="hidden" name="simgname" id="simgname"/>
-                    {errors.contents && <div className="invalid-feedback">{errors.ginames}</div>}
+                    {errors.ginames && <div className="invalid-feedback">{errors.ginames}</div>}
                 </div>
 
                 <div className="my-2 d-flex justify-content-center">
