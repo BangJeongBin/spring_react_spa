@@ -61,6 +61,7 @@ const Join = () => {
         // FormData API를 사용해서 폼 데이터 수집
         const formData = new FormData(formJoinRef.current);
         const formValues = Object.fromEntries(formData.entries());
+        console.log(">> join ", formValues["g-recaptcha-response"]);
 
         // 전체 폼 유효성 검사
         const formErrors = validateJoinForm(formValues);
