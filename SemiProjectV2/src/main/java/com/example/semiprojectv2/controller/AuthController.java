@@ -2,6 +2,7 @@ package com.example.semiprojectv2.controller;
 
 import com.example.semiprojectv2.domain.User;
 import com.example.semiprojectv2.jwt.JwtTokenProvider;
+import com.example.semiprojectv2.service.GoogleRecaptchaService;
 import com.example.semiprojectv2.service.MemberService;
 import com.example.semiprojectv2.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class AuthController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
+    private final GoogleRecaptchaService googleRecaptchaService;
 
 
     @PostMapping("/signup")
@@ -37,6 +39,10 @@ public class AuthController {
         log.info("submit된 회원정보 : {}", user);
 
         try {
+            if (!googleRecaptchaService.verifyRecaptcha(user.getGRecaptchaResponse())) {
+                throw new IllegalStateException("자동가입방지 코드 오류!!");
+            }
+
             userService.newUser(user);
             response =  ResponseEntity.ok().build();
         } catch (IllegalStateException e) {
