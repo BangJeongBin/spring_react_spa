@@ -68,7 +68,7 @@ const PdsView = () => {
                                     <td colSpan="2">
                                     첨부파일 : {
                                         pdsData.pas.map(pa => (
-                                            <p>{pa.pafname} ({pa.pafsize} KB)</p>
+                                            <p key={`fa-${pa.pano}`}><a href={`http://localhost:8080/api/pds/down/${pa.pafname}`}>{pa.pafname}</a> ({pa.pafsize} KB)</p>
                                         ))
                                     }
                                     </td>
