@@ -18,8 +18,11 @@ public class PdsAttach {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pano;
 
+//    @Column(nullable=false)
+//    private String uuid; // 저장되는 파일명
+
     @Column(nullable=false)
-    private String pafname;
+    private String pafname; // 실제 보여줄 파일명
 
     @Column(nullable=false)
     private int pafsize;
