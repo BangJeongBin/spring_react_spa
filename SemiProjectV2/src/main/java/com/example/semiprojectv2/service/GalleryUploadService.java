@@ -90,8 +90,8 @@ public class GalleryUploadService {
             // crop(대상, x좌표, y좌표, 잘라낼너비, 잘라낼높이, 투명도)
             BufferedImage scaleImg = Scalr.crop(img,
                     (img.getWidth() - imgW) / 2,
-                    (img.getHeight() - imgH) / 2,  // crop할 좌표
-                    imgW, imgH,   // crop할 이미지 크기
+                    (img.getHeight() - imgH) / 2, // crop할 좌표
+                    imgW, imgH, // crop할 이미지 크기
                     null);
 
             // 잘라낸 이미지를 330x350 크기로 재조정

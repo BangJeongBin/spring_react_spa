@@ -10,34 +10,28 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "gallerys4")
+@Table(name = "pds_replys4")
 @Data @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Gallery {
-
+@AllArgsConstructor
+public class PdsReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ggno;
+    private Long rno;
 
-    @Column(nullable=false)
-    private String title;
+    @Column(nullable = false)
+    private String comments;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String userid;
 
-    @Column(nullable=false)
-    private String simgname;
-
-    @Column(nullable=false)
-    private int thumbs = 0;
-
-    @Column(nullable=false)
-    private int views = 0;
-
-    @Column(nullable=false)
-    private String contents;
-
     @CreationTimestamp
+    @Column(insertable = false)
     private LocalDateTime regdate;
+
+    @Column(nullable = false)
+    private int ref;
+
+    @Column(nullable = false)
+    private int pno;
 }

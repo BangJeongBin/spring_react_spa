@@ -7,12 +7,9 @@ import "../styles/gallery.css";
 // 게시글 등록 처리 함수
 const processWriteOk = async (formValues) => {
 
-    fetch('http://localhost:8080/api/board/write', {
+    fetch('http://localhost:8080/api/gallery/write', {
         method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formValues)
+        body: formValues
     }).then(async reponse => {
         if (reponse.ok) {
             alert('게시글이 등록되었습니다.');
@@ -42,16 +39,24 @@ const GalleryWrite = () => {
         e.preventDefault();
 
         // FormData API를 사용해서 폼 데이터 수집
-        const formDate = new FormData(formWriteRef.current);
-        const formValues = Object.fromEntries(formDate.entries());
+        const formData = new FormData(formWriteRef.current);
+        const formValues = Object.fromEntries(formData.entries());
 
         // 전체 폼 유효성 검사
         const formErrors = validateWriteForm(formValues);
 
         if (Object.keys(formErrors).length === 0) {
-            console.log('입력한 글 정보 : ', formValues);
+            // comment01.jpg => comment01_small.jpg
+            const fname = formData.getAll("ginames")[0].name.split('.');
+            const tfname = `${fname[0]}_small.${fname[1]}`;
+            //console.log(">> fname, tfname ", fname, tfname);
+            formData.set("simgname", tfname); // set(요소명, 값)
+
+            //console.log(">> formDate", formData);
+            //console.log(">> formValues", formValues);
+
             // 게시글 등록 API 호출
-            processWriteOk(formValues);
+            processWriteOk(formData);
         } else {
             setErrors(formErrors);
             console.log('오류 정보 : ', formErrors);
