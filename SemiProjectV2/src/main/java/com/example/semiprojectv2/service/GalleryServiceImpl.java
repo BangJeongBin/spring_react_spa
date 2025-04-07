@@ -4,6 +4,7 @@ import com.example.semiprojectv2.domain.Gallery;
 import com.example.semiprojectv2.domain.GalleryImage;
 import com.example.semiprojectv2.repository.GalleryImageRepository;
 import com.example.semiprojectv2.repository.GalleryRepository;
+import com.example.semiprojectv2.utils.PdsUploadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class GalleryServiceImpl implements GalleryService {
 
     private final GalleryRepository galleryMapper;
     private final GalleryImageRepository galleryImageMapper;
-    private final GalleryUploadService galleryUploadService;
+    private final PdsUploadService galleryUploadService;
 
 
 //    @Override
