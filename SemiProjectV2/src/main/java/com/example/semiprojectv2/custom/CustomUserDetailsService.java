@@ -26,6 +26,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUserid(userid)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자가 존재하지 않습니다."));
 
+        // 로그인 가능 여부 확인 - 즉, 이메일 인증 여부 확인
+        if (!user.getEnabled().equals("true")) {
+            throw new NotEmailVerifyException("이메일 인증을 해주세요.");
+        }
+
         log.info("loadUserByUsername 호출 후... : {}", user);
 
         // 인증에 성공하면 userDetails 객체 초기화 후 반환
