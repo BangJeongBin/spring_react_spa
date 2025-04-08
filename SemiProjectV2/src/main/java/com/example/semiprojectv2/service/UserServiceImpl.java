@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -71,5 +73,20 @@ public class UserServiceImpl implements UserService {
             throw new IllegalStateException("아이디나 비밀번호가 일치하지 않습니다.");
         }
         return findUser;
+    }
+
+
+    @Override
+    public boolean verifyEmail(String userid, String email, String verifyCode) {
+        Optional<User> user = userMapper.findByUseridAndEmailAndVerifycode(userid, email, verifyCode);
+
+        if (user.isPresent()) {
+            user.get().setVerifycode(null); // 인증코드 초기화
+            user.get().setEnabled("true"); // 로그인 가능하도록 설정
+            userMapper.save(user.get());
+
+            return true;
+        }
+        return false;
     }
 }

@@ -7,4 +7,6 @@ public interface UserService {
     User newUser(User user);
 
     User loginUser(User user);
+
+    boolean verifyEmail(String userid, String email, String verifyCode);
 }
