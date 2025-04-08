@@ -33,8 +33,14 @@ public class User {
     @Column(unique=true, nullable=false)
     private String email;
 
-    @Column(nullable=false)
-    private String role;
+    @Column
+    private String enabled = "false";
+
+    @Column
+    private String verifycode;
+
+    @Column
+    private String role = "USER";
 
     @CreationTimestamp
     private LocalDateTime regdate;
