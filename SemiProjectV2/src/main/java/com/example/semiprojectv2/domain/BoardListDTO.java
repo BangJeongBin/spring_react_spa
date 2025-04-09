@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class BoardListDTO {
-    private int cpg;    // 현채 페이지
+    private int cpg;    // 현재 페이지
     private int stblk;  // 페이지당 시작하는 게시물 번호
     private int cntpg;  // 전체 페이지 수
     private int edblk; // 페이지당 끝나는 게시물 번호

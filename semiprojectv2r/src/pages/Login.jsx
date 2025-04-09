@@ -69,23 +69,23 @@ const Login = () => {
 
     // 폼 유효성 검사 함수
     const validateLoginForm = (values) => {
-        let formErrors = {};
+        let formError = {};
 
         // 아이디 검사
         if (!values.userid) {
-            formErrors.userid = '아이디를 입력하세요.';
+            formError.userid = '아이디를 입력하세요.';
         } else if (values.userid.length < 6) {
-            formErrors.userid = '아이디는 6자 이상 입력하세요.';
+            formError.userid = '아이디는 6자 이상 입력하세요.';
         }
 
         // 비밀번호 검사
         if (!values.passwd) {
-            formErrors.passwd = '비밀번호를 입력하세요.';
+            formError.passwd = '비밀번호를 입력하세요.';
         } else if (values.passwd.length < 6) {
-            formErrors.passwd = '비밀번호는 6자 이상 입력하세요.';
+            formError.passwd = '비밀번호는 6자 이상 입력하세요.';
         }
 
-        return formErrors;
+        return formError;
     };
 
 

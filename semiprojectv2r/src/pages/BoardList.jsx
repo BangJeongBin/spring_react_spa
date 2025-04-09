@@ -47,6 +47,7 @@ const BoardList = () => {
         location.href = `/board/find/${findtype}/${findkey}/1`;
     };
 
+
     return (
         <main id="content">
             <h2>게시판</h2>
