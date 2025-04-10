@@ -118,7 +118,7 @@ public class KakaoController {
     @GetMapping("/logout")
     //public ResponseEntity<String> kakaoLogout() {
     public String kakaoLogout() {
-        // 카카옫가 발급한 액세스 토큰 모효화 - 재 로그인 시 아이디/비번 입력 없음
+        // 카카오가 발급한 액세스 토큰 모효화 - 재 로그인 시 아이디/비번 입력 없음
         String logoutUrl = "https://kapi.kakao.com/v1/user/logout";
 
         HttpHeaders headers = new HttpHeaders();
