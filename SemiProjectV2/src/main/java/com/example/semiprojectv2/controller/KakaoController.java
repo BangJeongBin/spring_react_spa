@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +26,9 @@ public class KakaoController {
 
     @Value("${kakao.redirect.uri}")
     private String redirectUri;
+
+    @Value("${kakao.redirect.logout.uri}")
+    private String redirectLogoutUri;
 
     private final RestTemplate restTemplate;
     private static String AccessToken = null;
@@ -114,9 +116,10 @@ public class KakaoController {
 
     // 카카오 로그아웃
     @GetMapping("/logout")
-    public ResponseEntity<String> kakaoLogout() {
+    //public ResponseEntity<String> kakaoLogout() {
+    public String kakaoLogout() {
+        // 카카옫가 발급한 액세스 토큰 모효화 - 재 로그인 시 아이디/비번 입력 없음
         String logoutUrl = "https://kapi.kakao.com/v1/user/logout";
-
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -133,10 +136,15 @@ public class KakaoController {
                 logoutUrl, HttpMethod.POST,
                 request, String.class
         );
-
         log.info("Logout Response: {}", response.getStatusCode());
 
-        return ResponseEntity.ok("로그아웃 성공!!");
+        //return ResponseEntity.ok("로그아웃 성공!!");
+
+        // 완전한 로그아웃 - 재 로그인 시 아이디/비번 다시 입력 필요
+        logoutUrl = "https://kauth.kakao.com/oauth/logout";
+        String params = String.format("?client_id=%s&logout_redirect_uri=%s", clientId, redirectLogoutUri);
+
+        return "redirect:" + logoutUrl + params;
     }
 
 }

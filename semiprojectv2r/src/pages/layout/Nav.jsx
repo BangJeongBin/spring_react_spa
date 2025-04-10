@@ -13,7 +13,7 @@ const Nav = () => {
             <ul className="nav space-between">
                 <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
 
-                { login || kakao ?
+                { login ?
                     (<>
                         <li className="nav-item"><a href="#" className="nav-link">회원가입</a></li>
                         <li className="nav-item"><a href="/member/logout" className="nav-link">로그아웃</a></li>
