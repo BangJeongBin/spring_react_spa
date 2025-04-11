@@ -61,7 +61,7 @@ public class AuthController {
         log.info("submit된 로그인 정보 : {}", user);
 
         try {
-            // 스프링 시큐리티에서 제공하는 인증처리 메니저로 인증 처리
+            // 스프링 시큐리티에서 제공하는 인증처리 매니저로 인증 처리
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUserid(), user.getPasswd())
             );
